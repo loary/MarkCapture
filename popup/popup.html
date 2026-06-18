@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkCapture</title>
+    <meta name="description" content="一个网页转 Markdown 的浏览器插件，支持预览、下载和语音朗读功能。">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 MarkCapture</h1>
+            <span class="status" id="status">就绪</span>
+        </div>
+
+        <div class="toolbar">
+            <button class="btn btn-primary" id="convertBtn">🔄 转换页面</button>
+            <label class="option">
+                <input type="checkbox" id="keepImages" checked>
+                <span>图片</span>
+            </label>
+            <label class="option">
+                <input type="checkbox" id="keepLinks" checked>
+                <span>链接</span>
+            </label>
+        </div>
+
+        <div class="preview-area-wrap">
+            <textarea id="editorArea" class="editor-area" placeholder="点击「转换页面」开始转换"></textarea>
+        </div>
+
+        <div class="actions" id="actions" style="display:none;">
+            <button class="btn btn-success" id="downloadBtn">💾 下载</button>
+            <button class="btn btn-secondary" id="copyBtn">📋 复制</button>
+            <button class="btn btn-danger" id="clearBtn">🗑️ 清空</button>
+            <div class="speech-divider"></div>
+            <button class="btn btn-speech" id="speechBtn">🔊 朗读</button>
+            <button class="btn btn-warning" id="pauseBtn" style="display:none;">⏸️ 暂停</button>
+            <button class="btn btn-stop" id="stopBtn" style="display:none;">⏹️ 停止</button>
+        </div>
+
+        <!-- 语音配置面板：始终可见，可折叠 -->
+        <div class="speech-panel">
+            <div class="speech-panel-header" id="speechPanelToggle">
+                <span class="speech-panel-title">🎤 语音朗读设置</span>
+                <span class="speech-panel-toggle" id="speechToggleIcon">▲</span>
+            </div>
+            <div class="speech-panel-body" id="speechPanelBody">
+                <div class="speech-config-row">
+                    <label class="speech-config-item">
+                        <span class="config-label">音色</span>
+                        <select id="voiceSelect" class="voice-select"></select>
+                    </label>
+                    <label class="speech-config-item">
+                        <span class="config-label">语速</span>
+                        <div class="range-with-value">
+                            <input type="range" id="speedRange" min="0.3" max="3" step="0.1" value="1.0">
+                            <span id="speedValue">1.0x</span>
+                        </div>
+                    </label>
+                    <label class="speech-config-item">
+                        <span class="config-label">音高</span>
+                        <div class="range-with-value">
+                            <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1.0">
+                            <span id="pitchValue">1.0x</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="speech-config-status" id="speechConfigStatus"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span id="pageInfo"></span>
+            <span id="lengthInfo"></span>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
